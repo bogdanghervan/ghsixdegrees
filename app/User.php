@@ -2,31 +2,36 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
-use Laravel\Lumen\Auth\Authorizable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Vinelab\NeoEloquent\Eloquent\Model;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+/**
+ * User model.
+ *
+ * @package App
+ */
+class User extends Model
 {
-    use Authenticatable, Authorizable;
+    /**
+     * The node label.
+     *
+     * @var string|array
+     */
+    protected $label = 'User';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email',
-    ];
+    protected $fillable = ['githubId', 'login'];
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * Defines an outgoing relationship between User and Repository.
      *
-     * @var array
+     * @return \Vinelab\NeoEloquent\Eloquent\Relations\HasMany
      */
-    protected $hidden = [
-        'password',
-    ];
+    public function repositories()
+    {
+        return $this->hasMany('App\Repository', 'CONTRIBUTED_TO');
+    }
 }

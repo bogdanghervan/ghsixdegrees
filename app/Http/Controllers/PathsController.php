@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Everyman\Neo4j\Path;
 use Illuminate\Http\Request;
 use App\Services\Paths as PathsService;
 
@@ -13,17 +12,43 @@ class PathsController extends Controller
      * GET /paths/{user1}/{user2}
      *
      * @param  Request $request
-     * @param  string $user1
-     * @param  string $user2
+     * @param  string $startUserId
+     * @param  string $endUserId
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $user1, $user2)
+    public function index(Request $request, $startUserId, $endUserId)
     {
         $pathsService = new PathsService();
 
-        $validator = $pathsService->makeValidator(['user1' => $user1, 'user2' => $user2]);
+        // Validate request
+        $validator = $pathsService->makeValidator([
+            'startUser' => $startUserId,
+            'endUser' => $endUserId
+        ]);
         $validator->validate();
 
-        $path = $pathsService->findPath($user1, $user2);
+        // Ensure that start and end nodes exist
+        $startUser = $pathsService->findUser($startUserId);
+        if (!$startUser) {
+            return $this->errorInvalidParameter('startUser',
+                sprintf('User %s not found', $startUserId));
+        }
+        $endUser = $pathsService->findUser($endUserId);
+        if (!$endUser) {
+            return $this->errorInvalidParameter('endUser',
+                sprintf('User %s not found', $endUserId));
+        }
+
+        // Search for the shortest distance between given users,
+        // and return distance = 0 if given users are one and the same
+        $segments = [];
+        if ($startUser != $endUser) {
+            $segments = $pathsService->findPath($startUser, $endUser);
+        }
+
+        return $this->respondWithArray([
+            'distance' => count($segments),
+            'segments' => $segments
+        ]);
     }
 }
