@@ -72,3 +72,7 @@ curl -XGET 'http://ghsixdegrees.local/paths/bogdanghervan/taylorotwell'
   * It is used by both `App/Http/Controllers/PathsController` and `App/Exceptions/Handler`
 * `tests/PathsTest.php`
   * API functional tests.
+
+### Visualization of test data
+
+![Test Data Visualization](https://github.com/bogdanghervan/ghsixdegrees/raw/master/visualization.png "Test Data Visualization")
