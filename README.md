@@ -36,7 +36,7 @@ provide both users will result in a 404 error.
 
 Let's try another request with contributors farther away.
 ```
-curl -XGET 'http://ghsixdegrees.local/paths/bogdanghervan/taylorotwell'
+curl -XGET 'http://ghsixdegrees.local/paths/bogdanghervan/GrahamCampbell'
 {
    "length": 2,
    "segments": [
