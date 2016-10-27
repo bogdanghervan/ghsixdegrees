@@ -7,7 +7,7 @@ Six degrees of separation problem on GitHub contribution graph.
 ```
 GET /paths/:startUser/:endUser
 ```
-`startUser` and `endUser` can either be the GitHub ID or the login handle,
+`:startUser` and `:endUser` can either be the GitHub ID or the login handle,
 for convenience.
 
 No authentication needed.
@@ -21,7 +21,7 @@ A contribution path can only exists in the context of two users. Failing to
 provide both users will result in a 404 error.
 
 #### Sample response
-```JSON
+```json
 {
   length: 1,
   segments: [
