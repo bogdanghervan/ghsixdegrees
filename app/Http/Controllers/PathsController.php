@@ -28,6 +28,7 @@ class PathsController extends Controller
         $validator->validate();
 
         // Ensure that start and end nodes exist
+        // TODO: send a 404 instead?
         $startUser = $pathsService->findUser($startUserId);
         if (!$startUser) {
             return $this->errorInvalidParameter('startUser',

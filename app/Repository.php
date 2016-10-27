@@ -6,7 +6,7 @@ use Vinelab\NeoEloquent\Eloquent\Model;
 
 /**
  * Repository model.
- * 
+ *
  * @package App
  */
 class Repository extends Model
