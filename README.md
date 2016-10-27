@@ -21,14 +21,14 @@ A contribution path can only exists in the context of two users. Failing to
 provide both users will result in a 404 error.
 
 #### Sample response
-```json
+```
 {
-  length: 1,
-  segments: [
+  "length": 1,
+  "segments": [
     {
-      repository: "laravel/framework",
-      startUser: "bogdanghervan",
-      endUser: "taylorotwell"
+      "repository": "laravel/framework",
+      "startUser": "bogdanghervan",
+      "endUser": "taylorotwell"
     }
   ]
 }
@@ -38,17 +38,17 @@ Let's try another request with contributors farther away.
 ```
 curl -XGET 'http://ghsixdegrees.local/paths/bogdanghervan/taylorotwell'
 {
-   length: 2,
-   segments: [
+   "length": 2,
+   "segments": [
      {
-        repository: "laravel/framework",
-        startUser: "bogdanghervan",
-        endUser: "taylorotwell"
+        "repository": "laravel/framework",
+        "startUser": "bogdanghervan",
+        "endUser": "taylorotwell"
      },
      {
-        repository: "laravel/elixir",
-        startUser: "taylorotwell",
-        endUser: "GrahamCampbell"
+        "repository": "laravel/elixir",
+        "startUser": "taylorotwell",
+        "endUser": "GrahamCampbell"
      }
    ]
 }
