@@ -14,7 +14,7 @@ No authentication needed.
 
 #### Sample request
 ```
-curl -XGET 'http://ghsixdegrees.local/paths/bogdanghervan/taylorotwell'
+curl -XGET 'https://ghsixdegrees.herokuapp.com/paths/bogdanghervan/taylorotwell'
 ```
 
 A contribution path can only exists in the context of two users. Failing to
@@ -36,7 +36,7 @@ provide both users will result in a 404 error.
 
 Let's try another request with contributors farther away.
 ```
-curl -XGET 'http://ghsixdegrees.local/paths/bogdanghervan/GrahamCampbell'
+curl -XGET 'https://ghsixdegrees.herokuapp.com/paths/bogdanghervan/GrahamCampbell'
 {
    "length": 2,
    "segments": [
