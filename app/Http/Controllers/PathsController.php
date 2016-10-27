@@ -47,7 +47,7 @@ class PathsController extends Controller
         }
 
         return $this->respondWithArray([
-            'distance' => count($segments),
+            'length' => count($segments),
             'segments' => $segments
         ]);
     }
