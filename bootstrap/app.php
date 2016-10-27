@@ -27,6 +27,20 @@ $app->withFacades();
 
 // $app->withEloquent();
 
+// Register our own logger
+unset($app->availableBindings['log']);
+unset($app->availableBindings['Psr\Log\LoggerInterface']);
+
+$app->singleton('Psr\Log\LoggerInterface', function() use ($app) {
+    $logger = new Monolog\Logger($app->environment());
+    $logger->pushProcessor(new Monolog\Processor\WebProcessor());
+
+    $handler = new Monolog\Handler\SyslogHandler('lumen', LOG_USER, $logger::DEBUG, false);
+    $logger->pushHandler($handler);
+
+    return $logger;
+});
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -98,6 +112,7 @@ $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__.'/../app/Http/routes.php';
 });
 
+// Process configuration files
 $app->configure('database');
 
 return $app;
