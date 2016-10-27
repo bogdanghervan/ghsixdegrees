@@ -11,8 +11,4 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
-});
-
 $app->get('paths/{user1}/{user2}', 'PathsController@index');
